@@ -4,11 +4,13 @@ class Api::V1::TrailsController < ApplicationController
 
   def index
     @trails = Trail.all
-    render json: @trails
+    trails_json = TrailSerializer.new(@trails).serialized_json
+    render json: trails_json
   end
 
   def show
-    render json: @trail
+    trail_json = TrailSerializer.new(@trail).serialized_json
+    render json: trail_json
   end
 
   def create

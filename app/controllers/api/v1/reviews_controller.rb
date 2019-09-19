@@ -4,7 +4,8 @@ class Api::V1::ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all
-    render json: @reviews
+    reviews_json = ReviewSerializer.new(@reviews).serialized_json
+    render json: reviews_json
   end
 
   def show
