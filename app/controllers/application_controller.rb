@@ -1,12 +1,16 @@
 class ApplicationController < ActionController::API
+  include ::ActionController::Cookies
 
-    def current_user
-      # currently a mocked version of "being logged in"
-      User.first
-    end
+  # protect_from_forgery with: :null_session
 
-    def logged_in?
-      !!current_user
-    end
-  
+
+  def current_user	  
+    User.find_by(id: session[:user_id])	
+  end	 
+ 
+
+  def logged_in?	 
+    !!current_user
+  end
+
 end

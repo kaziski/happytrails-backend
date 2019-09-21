@@ -4,10 +4,14 @@
 
 
 #User
-kazumi = User.create(name: "Kazumi", username: "Codingmamakaz", password: "password")
-john = User.create(name: "John", username: "Cookingpapajohn", password: "password")
-jiji = User.create(name: "Jion", username: "Jiji", password: "password")
-keima = User.create(name: "Keima", username: "Keima", password: "password")
+# kazumi = User.create(name: "Kazumi", username: "Codingmamakaz", password: "password")
+# john = User.create(name: "John", username: "Cookingpapajohn", password: "password")
+# jiji = User.create(name: "Jion", username: "Jiji", password: "password")
+# keima = User.create(name: "Keima", username: "Keima", password: "password")
+kazumi = User.create(username: "Codingmamakaz", password: "password")
+john = User.create(username: "Cookingpapajohn", password: "password")
+jiji = User.create(username: "Jiji", password: "password")
+keima = User.create(username: "Keima", password: "password")
 
 #Trail
 trail_list = [
