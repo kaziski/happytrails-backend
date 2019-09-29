@@ -3,9 +3,16 @@ class Api::V1::ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :update, :destroy]
 
   def index
-    @reviews = Review.all
+    if logged_in? 
+    @reviews = current_user.reviews
+    # @reviews = Review.all
     reviews_json = ReviewSerializer.new(@reviews).serialized_json
     render json: reviews_json
+    else
+      render json: {
+        error: "You must be logged in to see reviews"
+      }
+    end
   end
 
   def show
