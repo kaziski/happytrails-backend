@@ -15,14 +15,14 @@ keima = User.create(username: "Keima", password: "password")
 
 #Trail
 trail_list = [
-  ['Scrubglass', 2.4],
-  ['Peters Lake', 2],
-  ['Frankfort Mineral Springs', 1.2],
-  ['Ohio community park', 0.8]
+  ['Scrubglass', 2.4, 1],
+  ['Peters Lake', 2, 2],
+  ['Frankfort Mineral Springs', 1.2, 3],
+  ['Ohio community park', 0.8, 1]
 ]
 
 trail_list.each do |trail|
-  Trail.create(name: trail[0], length: trail[1])
+  Trail.create(name: trail[0], length: trail[1], user_id: trail[2])
 end
 
 #Review

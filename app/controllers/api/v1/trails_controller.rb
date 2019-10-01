@@ -15,12 +15,13 @@ class Api::V1::TrailsController < ApplicationController
 
   def create
     @trail = Trail.new(trail_params)
-
-binding.pry
     if @trail.save
-      render json: @trail, status: :created, location: @trail
+      render json: TrailSerializer.new(@trail), status: :created
     else
-      render json: @trail.errors, status: :unprocessable_entity
+      resp = {
+        error: @trail.errors.full_messages.to_sentence
+      }
+      render json: resp, status: :unprocessable_entity
     end
   end
 
@@ -42,6 +43,6 @@ binding.pry
     end
 
     def trail_params
-      params.require(:trail).permit(:name, :length, :url, :longitude, :latitude)
+      params.require(:trail).permit(:name, :length, :url, :longitude, :latitude, :user_id)
     end
 end
