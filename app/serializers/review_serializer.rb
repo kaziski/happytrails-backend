@@ -1,7 +1,7 @@
 class ReviewSerializer
   include FastJsonapi::ObjectSerializer
   attributes :comment, :trail_id, :user_id
-
+  belongs_to :trail, serializer: TrailSerializer
   #belongs_to :user :trail
   # attribute :trail do |review|
   #   {
