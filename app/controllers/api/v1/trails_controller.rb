@@ -16,6 +16,7 @@ class Api::V1::TrailsController < ApplicationController
   def create
     @trail = Trail.new(trail_params)
 
+binding.pry
     if @trail.save
       render json: @trail, status: :created, location: @trail
     else
@@ -41,6 +42,6 @@ class Api::V1::TrailsController < ApplicationController
     end
 
     def trail_params
-      params.require(:trail).permit(:name, :length)
+      params.require(:trail).permit(:name, :length, :url, :longitude, :latitude)
     end
 end
