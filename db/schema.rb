@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2019_09_18_221608) do
     t.string "name"
     t.float "length"
     t.string "url"
+    t.string "imgSmallMed"
+    t.string "summary"
     t.decimal "longitude"
     t.decimal "latitude"
     t.integer "user_id"

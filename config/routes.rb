@@ -18,3 +18,6 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html  
 end
+
+#does the trails inside of users necessary?
+# I have logic to only shwo the trails belongs to the current_user

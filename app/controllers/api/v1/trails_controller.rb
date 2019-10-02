@@ -14,18 +14,23 @@ class Api::V1::TrailsController < ApplicationController
   end
 
   def create
+    
+    
     # this is trail coming in
       @trail = Trail.new(trail_params)
       # trails belong to the user 
       trails = Trail.where(:user_id => current_user.id)
+      #see if @trail already exist
       dupes = trails.where(:name => @trail.name)
+      
       if dupes.empty?
-        @trail.save
+        @trail.save        
         render json: TrailSerializer.new(@trail), status: :created
       else
         resp = {
-          # error: @trail.errors.full_messages.to_sentence
-          error: "You've saved the trail already."
+          error: @trail.errors.full_messages.to_sentence
+          #figre out a way to print this msg when appropreate`
+          # error: "You've saved the trail already."
         }
         render json: resp, status: :unprocessable_entity
       end
@@ -50,6 +55,6 @@ class Api::V1::TrailsController < ApplicationController
     end
 
     def trail_params
-      params.require(:trail).permit(:name, :length, :url, :longitude, :latitude, :user_id)
+      params.require(:trail).permit(:name, :length, :url, :imgSmallMed, :summary, :longitude, :latitude, :user_id)
     end
 

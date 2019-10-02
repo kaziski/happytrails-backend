@@ -4,6 +4,8 @@ class CreateTrails < ActiveRecord::Migration[5.2]
       t.string :name
       t.float :length
       t.string :url
+      t.string :imgSmallMed
+      t.string :summary
       t.decimal :longitude
       t.decimal :latitude
       t.integer :user_id
