@@ -3,7 +3,7 @@ class Api::V1::TrailsController < ApplicationController
   before_action :set_trail, only: [:show, :update, :destroy]
 
   def index
-    @trails = Trail.all
+    @trails = Trail.where(:user_id => current_user.id)
     trails_json = TrailSerializer.new(@trails).serialized_json
     render json: trails_json
   end
@@ -14,14 +14,21 @@ class Api::V1::TrailsController < ApplicationController
   end
 
   def create
-    @trail = Trail.new(trail_params)
-    if @trail.save
-      render json: TrailSerializer.new(@trail), status: :created
-    else
-      resp = {
-        error: @trail.errors.full_messages.to_sentence
-      }
-      render json: resp, status: :unprocessable_entity
+    # this is trail coming in
+      @trail = Trail.new(trail_params)
+      # trails belong to the user 
+      trails = Trail.where(:user_id => current_user.id)
+      dupes = trails.where(:name => @trail.name)
+      if dupes.empty?
+        @trail.save
+        render json: TrailSerializer.new(@trail), status: :created
+      else
+        resp = {
+          # error: @trail.errors.full_messages.to_sentence
+          error: "You've saved the trail already."
+        }
+        render json: resp, status: :unprocessable_entity
+      end
     end
   end
 
@@ -45,4 +52,4 @@ class Api::V1::TrailsController < ApplicationController
     def trail_params
       params.require(:trail).permit(:name, :length, :url, :longitude, :latitude, :user_id)
     end
-end
+
