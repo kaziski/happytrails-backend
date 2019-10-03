@@ -14,8 +14,6 @@ class Api::V1::TrailsController < ApplicationController
   end
 
   def create
-    
-    
     # this is trail coming in
       @trail = Trail.new(trail_params)
       # trails belong to the user 
