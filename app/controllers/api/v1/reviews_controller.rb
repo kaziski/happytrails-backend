@@ -20,7 +20,7 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def create
-    @review = Trail.new(review_params)
+    @review = Review.new(review_params)
 
     if @review.save
       render json: @review, status: :created, location: @review
@@ -43,10 +43,10 @@ class Api::V1::ReviewsController < ApplicationController
 
   private
     def set_review
-      @review = Trail.find(params[:id])
+      @review = Review.find(params[:id])
     end
 
     def review_params
-      params.require(:trail).permit(:comment, :trail_id, :user_id)
+      params.require(:review).permit(:comment, :api_trail_id, :api_trail_name, :api_trail_url, :user_id)
     end
 end
