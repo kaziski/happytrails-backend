@@ -21,15 +21,14 @@ class Api::V1::ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)  
-    #if the review is coming from MyTrails, find a trail from Trails
-    #using trail name, then @review.trail_id = Trail[the one found].trail_id
+    
     if @review.save      
-      # api_trail_reviews = Review.where(:api_trail_id => @review.api_trail_id)  
+      #Finding all reviews associated with the trail being reviewed
+      trail_reviews = Review.where(:api_trail_id => @review.api_trail_id)  
 
-# find by name 
-# binding.pry
+      #can i do this???
       my_reviews = Review.where(:user_id => current_user.id)
-      render json: ReviewSerializer.new(@review), status: :created, my_reviews: my_reviews
+      render json: ReviewSerializer.new(@review), status: :created, trail_reviews: trail_reviews
       # render json: ReviewSerializer.new(@review), status: :created, api_trail_reviews: api_trail_reviews
 
     else

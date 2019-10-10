@@ -25,8 +25,6 @@ class Api::V1::TrailsController < ApplicationController
       if dupes.empty?
         @trail.save       
         
-        binding.pry
-        
         render json: TrailSerializer.new(@trail), status: :created
       else
         resp = {
