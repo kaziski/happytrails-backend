@@ -3,5 +3,6 @@ class Review < ApplicationRecord
   belongs_to :trail, optional: true
 
   validates_presence_of :comment
+
 end
 

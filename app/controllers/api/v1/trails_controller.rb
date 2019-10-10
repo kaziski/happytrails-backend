@@ -16,6 +16,7 @@ class Api::V1::TrailsController < ApplicationController
   def create
     # this is trail coming in
       @trail = Trail.new(trail_params)
+    
       # trails belong to the user 
       trails = Trail.where(:user_id => current_user.id)
       #see if @trail already exist
@@ -23,6 +24,9 @@ class Api::V1::TrailsController < ApplicationController
       
       if dupes.empty?
         @trail.save       
+        
+        binding.pry
+        
         render json: TrailSerializer.new(@trail), status: :created
       else
         resp = {
@@ -53,6 +57,6 @@ class Api::V1::TrailsController < ApplicationController
     end
 
     def trail_params
-      params.require(:trail).permit(:name, :length, :url, :imgSmallMed, :summary, :longitude, :latitude, :user_id)
+      params.require(:trail).permit(:name, :length, :url, :imgSmallMed, :summary, :longitude, :latitude, :user_id, :api_trail_id)
     end
 
