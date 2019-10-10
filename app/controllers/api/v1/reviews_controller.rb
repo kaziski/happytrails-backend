@@ -24,11 +24,11 @@ class Api::V1::ReviewsController < ApplicationController
     
     if @review.save      
       #Finding all reviews associated with the trail being reviewed
-      trail_reviews = Review.where(:api_trail_id => @review.api_trail_id)  
+      # trail_reviews = Review.where(:api_trail_id => @review.api_trail_id)  
 
       #can i do this???
-      my_reviews = Review.where(:user_id => current_user.id)
-      render json: ReviewSerializer.new(@review), status: :created, trail_reviews: trail_reviews
+      # my_reviews = Review.where(:user_id => current_user.id)
+      render json: ReviewSerializer.new(@review), status: :created
       # render json: ReviewSerializer.new(@review), status: :created, api_trail_reviews: api_trail_reviews
 
     else
