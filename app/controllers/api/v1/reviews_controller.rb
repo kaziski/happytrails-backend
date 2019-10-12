@@ -50,6 +50,6 @@ class Api::V1::ReviewsController < ApplicationController
     end
 
     def review_params
-      params.require(:review).permit(:comment, :api_trail_id, :api_trail_name, :api_trail_url, :user_id)
+      params.require(:review).permit(:comment, :api_trail_id, :api_trail_name, :api_trail_url, :user_id, :username)
     end
 end
