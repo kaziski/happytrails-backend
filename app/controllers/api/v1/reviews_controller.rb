@@ -9,9 +9,10 @@ class Api::V1::ReviewsController < ApplicationController
     reviews_json = ReviewSerializer.new(@reviews).serialized_json
     render json: reviews_json
     else
-      render json: {
-        error: "You must be logged in to see reviews"
-      }
+      # render json: {
+      #   error: "You must be logged in to see reviews"
+      # }
+      render json: @review.errors, status: :unprocessable_entity
     end
   end
 
@@ -41,7 +42,16 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def destroy
-    @review.destroy
+
+    if @review.destroy
+      render json:  { data: "Review successfully deleted" }, status: :ok
+    else
+      error_resp = {
+        error: "Review not found and not deleted"
+      }
+      render json: error_resp, status: :unprocessable_entity
+    end
+    
   end
 
   private
