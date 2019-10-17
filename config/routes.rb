@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "/api/v1/get_current_user", to: "api/v1/sessions#get_current_user"
   delete "/api/v1/logout", to: "api/v1/sessions#destroy"
 
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
+  
   namespace :api do
     namespace :v1 do 
 
@@ -24,5 +28,3 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html  
 end
 
-#does the trails inside of users necessary?
-# I have logic to only shwo the trails belongs to the current_user
