@@ -12,8 +12,4 @@ class ApplicationController < ActionController::API
     !!current_user
   end
 
-  def fallback_index_html
-    render :file => 'public/index.html'
-  end
-
 end
