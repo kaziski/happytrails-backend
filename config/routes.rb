@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root "application#index"
+  root 'welcome#index'
   post '/api/v1/login', to: 'api/v1/sessions#create'
   post '/api/v1/signup', to: 'api/v1/users#create'
   post '/api/v1/newtrail', to: 'api/v1/trails#create'
