@@ -6,17 +6,19 @@ Rails.application.routes.draw do
   post '/api/v1/newtrail', to: 'api/v1/trails#create'
   get "/api/v1/get_current_user", to: "api/v1/sessions#get_current_user"
   delete "/api/v1/logout", to: "api/v1/sessions#destroy"
+  # delete "/api/v1/users/:user_id/trails/delete", to "/api/v1/users/:user_id/trails#destroy"
 
   namespace :api do
     namespace :v1 do 
 
       resources :users do
-        resources :trails, only: [:index]
+        resources :trails
       end
 
       resources :trails do
         resources :reviews, only: [:index]
       end
+
       resources :reviews
         
     end

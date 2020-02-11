@@ -45,7 +45,7 @@ class Api::V1::TrailsController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy    
     @trail.destroy
   end
 
