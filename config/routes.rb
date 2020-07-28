@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   root 'welcome#index'
   post '/api/v1/login', to: 'api/v1/sessions#create'
   post '/api/v1/signup', to: 'api/v1/users#create'
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # delete "/api/v1/users/:user_id/trails/delete", to "/api/v1/users/:user_id/trails#destroy"
 
   namespace :api do
-    namespace :v1 do 
+    namespace :v1 do
 
       resources :users do
         resources :trails
@@ -20,10 +20,9 @@ Rails.application.routes.draw do
       end
 
       resources :reviews
-        
     end
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html  
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
 
 #does the trails inside of users necessary?

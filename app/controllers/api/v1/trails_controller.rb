@@ -16,15 +16,14 @@ class Api::V1::TrailsController < ApplicationController
   def create
     # this is trail coming in
       @trail = Trail.new(trail_params)
-    
-      # trails belong to the user 
+      # trails belong to the user
       trails = Trail.where(:user_id => current_user.id)
       #see if @trail already exist
       dupes = trails.where(:name => @trail.name)
-      
+
       if dupes.empty?
-        @trail.save       
-        
+        @trail.save
+
         render json: TrailSerializer.new(@trail), status: :created
       else
         resp = {
@@ -45,7 +44,7 @@ class Api::V1::TrailsController < ApplicationController
     end
   end
 
-  def destroy    
+  def destroy
     @trail.destroy
   end
 

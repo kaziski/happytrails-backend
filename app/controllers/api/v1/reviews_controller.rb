@@ -3,7 +3,7 @@ class Api::V1::ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :update, :destroy]
 
   def index
-    if logged_in? 
+    if logged_in?
     @reviews = current_user.reviews
     # @reviews = Review.all
     reviews_json = ReviewSerializer.new(@reviews).serialized_json
@@ -21,9 +21,9 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)  
-    
-    if @review.save            
+    @review = Review.new(review_params)
+
+    if @review.save
       render json: ReviewSerializer.new(@review), status: :created
     else
       resp = {
@@ -51,7 +51,6 @@ class Api::V1::ReviewsController < ApplicationController
       }
       render json: error_resp, status: :unprocessable_entity
     end
-    
   end
 
   private
